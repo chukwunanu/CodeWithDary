@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\Product;
 use App\Models\Headquarter;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class CarsController extends Controller
     public function index()
     {
         $cars = Car::all();
-
+        
         return view('cars.index', [
             'cars' => $cars
         ]);
@@ -47,8 +48,9 @@ class CarsController extends Controller
     public function show(string $id)
     {
         $car = Car::findOrFail($id);
-
-        // $hq = Headquarter::findOrFail($id);
+        $products = Product::findOrFail($id);
+        
+        $hq = Headquarter::findOrFail($id);
         
         return view('cars.show')->with('car', $car);
     }
